@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Server Information</title>
+</head>
+<body>
+<div style="text-align: center">
+<h2 >服务器提交数据</h2>
+<form id="serverForm" style="margin: 10px">
+    <label for="ip">服务器ip：</label><br>
+    <input type="text" id="ip" name="ip" ><br>
+    <label for="port">端口号:</label><br>
+    <input type="number" id="port" name="port" ><br>
+    <label for="username">用户名:</label><br>
+    <input type="text" id="username" name ="username" ><br>
+    <label for= "password">密码:</label ><br>
+    <input type = "password" id = "password" name = "password">
+</form >
+<!-- 提交按钮 -->
+<button onclick = "updateServerInfo()">提交</button >
+</div>
+        <script >
+            function updateServerInfo() {
+                var ipValue = document.getElementById("ip").value;
+                var portValue = document.getElementById("port").value;
+                var usernameValue = document.getElementById("username").value;
+                var passwordValue=document.getElementById ("password") .value;
+                console.log(ipValue,portValue,usernameValue,passwordValue)
+            }
+        </script >
+</body >
+</html >

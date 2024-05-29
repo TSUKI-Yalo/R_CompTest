@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.11.3 on win32)" generated="2024-04-10T10:31:59.198192" rpa="false" schemaversion="5">
+<suite id="s1" name="RedisData" source="D:\workspace\RedisdataTest\TEST\DATA\RedisData.robot">
+<test id="s1-t1" name="Verify Redisdata Are Successful" line="26">
+<kw name="Connect To Redis Pool" owner="RedisKeywords">
+<kw name="Connect To Redis" owner="RedisLibrary">
+<msg time="2024-04-10T10:31:59.274197" level="INFO">${redis_add} = Redis&lt;ConnectionPool&lt;Connection&lt;host=192.168.10.203,port=6379,db=0&gt;&gt;&gt;</msg>
+<var>${redis_add}</var>
+<arg>${REDIS_IP}</arg>
+<arg>${REDIS_PORT}</arg>
+<arg>0</arg>
+<arg>redis_password=${REDIS_PASSWORD}</arg>
+<doc>Connect to the Redis server.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.273192" elapsed="0.002000"/>
+</kw>
+<return>
+<value>${redis_add}</value>
+<status status="PASS" start="2024-04-10T10:31:59.275192" elapsed="0.000000"/>
+</return>
+<msg time="2024-04-10T10:31:59.275192" level="INFO">${pool} = Redis&lt;ConnectionPool&lt;Connection&lt;host=192.168.10.203,port=6379,db=0&gt;&gt;&gt;</msg>
+<var>${pool}</var>
+<doc>Connects to the Redis database using a connection pool.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.273192" elapsed="0.002000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-04-10T10:31:59.275192" level="INFO">Pool: Redis&lt;ConnectionPool&lt;Connection&lt;host=192.168.10.203,port=6379,db=0&gt;&gt;&gt;</msg>
+<arg>Pool: ${pool}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.275192" elapsed="0.000000"/>
+</kw>
+<kw name="Get All Keys From Redis">
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2024-04-10T10:31:59.286195" level="INFO">${all_keys} = []</msg>
+<var>${all_keys}</var>
+<arg>${redis_pool}</arg>
+<arg>keys</arg>
+<arg>'*'</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.276191" elapsed="0.010004"/>
+</kw>
+<return>
+<value>${all_keys}</value>
+<status status="PASS" start="2024-04-10T10:31:59.286195" elapsed="0.000000"/>
+</return>
+<msg time="2024-04-10T10:31:59.286195" level="INFO">${keys} = []</msg>
+<var>${keys}</var>
+<arg>${pool}</arg>
+<status status="PASS" start="2024-04-10T10:31:59.275192" elapsed="0.011003"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-04-10T10:31:59.287195" level="INFO">key: []</msg>
+<arg>key: @{keys}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.287195" elapsed="0.000000"/>
+</kw>
+<kw name="Check If Parameter Exists In Database">
+<kw name="Get From Redis" owner="RedisLibrary">
+<msg time="2024-04-10T10:31:59.289197" level="INFO">${value} = None</msg>
+<var>${value}</var>
+<arg>${redis_pool}</arg>
+<arg>${key}</arg>
+<doc>Get cached data from Redis</doc>
+<status status="PASS" start="2024-04-10T10:31:59.287195" elapsed="0.002002"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Parameter '${key}' does not exist in the database</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.289197" elapsed="0.000000"/>
+</kw>
+<arg>'${value}' == 'None' or '${value}' == ''</arg>
+<arg>Log To Console</arg>
+<arg>Parameter '${key}' does not exist in the database</arg>
+<arg>ELSE</arg>
+<arg>Log To Console</arg>
+<arg>Parameter '${key}' exists in the database with value: ${value}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2024-04-10T10:31:59.289197" elapsed="0.000994"/>
+</kw>
+<msg time="2024-04-10T10:31:59.290191" level="INFO">${result} = None</msg>
+<var>${result}</var>
+<arg>${pool}</arg>
+<arg>11</arg>
+<status status="PASS" start="2024-04-10T10:31:59.287195" elapsed="0.002996"/>
+</kw>
+<status status="PASS" start="2024-04-10T10:31:59.272193" elapsed="0.017998"/>
+</test>
+<status status="PASS" start="2024-04-10T10:31:59.200192" elapsed="0.089999"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="RedisData">RedisData</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
